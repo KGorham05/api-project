@@ -16,10 +16,28 @@ function displayButtonInfo() {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        var thumb = response.data[0].images.fixed_width_still
-        
+        var itemDiv = $("<div class='item'>");
+        var itemGifArr = [];
 
+        for (var i = 0; i < response.data.length; i++) {
+            var itemStill = response.data[i].images.fixed_width_still.url;
+            itemGifArr.push(response.data[i].images.fixed_width.url);
+            console.log(itemGifArr);
+            var img = $("<img>");
+            img.attr("value", i);
+            img.attr("class", "bananas");
+            img.attr("src", itemStill);
+            itemDiv.append(img);
+            $("#item-view").prepend(itemDiv);
+            console.log(img);
+            
+        };
 
+        $(".bananas").on("click", function () {
+            console.log(img.attr("value"));
+            console.log("this value is " + $(this).attr("value"));
+            $(this).attr("src", itemGifArr[parseInt($(this).attr("value"))]);
+        });
 
     });
 
