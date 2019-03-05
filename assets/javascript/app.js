@@ -32,7 +32,7 @@
 // .
 
 
-// Initial array of dog breeds
+// Initial array of dog breeds...
 var items = ["Australian Shepherd", "Chihuahua", "Poodle", "St Bernard", "Mastiff"];
 var searchTerm = '';
 // displayButtonInfo function re-renders the HTML to display the appropriate content
