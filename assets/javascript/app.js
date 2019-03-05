@@ -1,4 +1,37 @@
 
+
+// Style the buttons, heading, etc with css + bootstrap
+// use columns+rows+divs to format the gifs + data that is returned
+// add each gif to a card that has a border, gif on top, text below, and margin around it for the next gif 
+// add a div separating the gif search portion with another api search function 
+
+
+// ### Bonus Goals
+
+// 1. Ensure your app is fully mobile responsive.
+
+// 2. Allow users to request additional gifs to be added to the page.
+//    * Each request should ADD 10 gifs to the page, NOT overwrite the existing gifs.
+
+// 3. List additional metadata (title, tags, etc) for each gif in a clean and readable format.
+
+// 4. Include a 1-click download button for each gif, this should work across device types.
+
+// 5. Integrate this search with additional APIs such as OMDB, or Bands in Town. Be creative and build something you are proud to showcase in your portfolio
+
+// 6. Allow users to add their favorite gifs to a `favorites` section.
+//    * This should persist even when they select or add a new topic.
+//    * If you are looking for a major challenge, look into making this section persist even when the page is reloaded(via localStorage or cookies)
+// ### Create a README.md
+
+// Add a `README.md` to your repository describing the project. Here are some resources for creating your `README.md`. Here are some resources to help you along the way:
+
+// * [About READMEs](https://help.github.com/articles/about-readmes/)
+
+// * [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
+// .
+
+
 // Initial array of dog breeds
 var items = ["Australian Shepherd", "Chihuahua", "Poodle", "St Bernard", "Mastiff"];
 var searchTerm = '';
@@ -21,15 +54,19 @@ function displayButtonInfo() {
         var giphy = response.data;
 
         for (var i = 0; i < giphy.length; i++) {
-            var dataStill = (giphy[i].images.fixed_width_still.url);
-            var dataGif = (giphy[i].images.fixed_width.url);
+            var dataStill = giphy[i].images.fixed_width_still.url;
+            var dataGif = giphy[i].images.fixed_width.url;
             var img = $("<img>");
+            var rating = giphy[i].rating;
+            var span = $("<span>");
+            span.append("Rating: " + rating)
             img.attr("data-state", "still");
             img.attr("data-still", dataStill);
             img.attr("data-animate", dataGif);
             img.attr("class", "gifs");
             img.attr("src", dataStill);
             itemDiv.append(img);
+            itemDiv.append(span);
             $("#item-view").prepend(itemDiv);
         };
 
