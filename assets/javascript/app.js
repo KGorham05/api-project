@@ -41,7 +41,7 @@ function displayButtonInfo() {
     // not sure what this line of code is for so I'm hiding it until it becomes useful
 
 
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&limit=10&rating=pg&api_key=E4GmjIzr95bf7cgs50n05QPKhxsZ1ZZh";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&limit=10&rating=pg&api_key=E4GmjIzr95bf7cgs50n05QPKhxsZ1ZZh";
 
    
     $.ajax({
