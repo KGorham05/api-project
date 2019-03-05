@@ -1,14 +1,14 @@
 
 // Initial array of dog breeds
 var items = ["Australian Shepherd", "Chihuahua", "Poodle", "St Bernard", "Mastiff"];
-
+var searchTerm = '';
 // displayButtonInfo function re-renders the HTML to display the appropriate content
 function displayButtonInfo() {
-
+    $("#item-view").empty();
     // not sure what this line of code is for so I'm hiding it until it becomes useful
-    //   var dogBreeds = $(this).attr("data-name");
 
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + items[0] + "&limit=10&rating=g&api_key=E4GmjIzr95bf7cgs50n05QPKhxsZ1ZZh";
+
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&limit=10&rating=g&api_key=E4GmjIzr95bf7cgs50n05QPKhxsZ1ZZh";
 
     // Creating an AJAX call for the specific dog breed button being clicked
     $.ajax({
@@ -17,26 +17,32 @@ function displayButtonInfo() {
     }).then(function (response) {
         console.log(response);
         var itemDiv = $("<div class='item'>");
-        var itemGifArr = [];
 
-        for (var i = 0; i < response.data.length; i++) {
-            var itemStill = response.data[i].images.fixed_width_still.url;
-            itemGifArr.push(response.data[i].images.fixed_width.url);
-            console.log(itemGifArr);
+        var giphy = response.data;
+
+        for (var i = 0; i < giphy.length; i++) {
+            var dataStill = (giphy[i].images.fixed_width_still.url);
+            var dataGif = (giphy[i].images.fixed_width.url);
             var img = $("<img>");
-            img.attr("value", i);
-            img.attr("class", "bananas");
-            img.attr("src", itemStill);
+            img.attr("data-state", "still");
+            img.attr("data-still", dataStill);
+            img.attr("data-animate", dataGif);
+            img.attr("class", "gifs");
+            img.attr("src", dataStill);
             itemDiv.append(img);
             $("#item-view").prepend(itemDiv);
-            console.log(img);
-            
         };
 
-        $(".bananas").on("click", function () {
-            console.log(img.attr("value"));
-            console.log("this value is " + $(this).attr("value"));
-            $(this).attr("src", itemGifArr[parseInt($(this).attr("value"))]);
+        $(".gifs").on("click", function () {
+            var state = $(this).attr("data-state");
+            if (state === "still") {
+                $(this).attr("src", $(this).attr("data-animate"));
+                $(this).attr("data-state", "animate");
+            } else {
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "still");
+            };
+
         });
 
     });
@@ -81,7 +87,12 @@ $("#add-item-btn").on("click", function (event) {
 });
 
 // Adding a click event listener to all elements with a class of "items-btn"
-$(document).on("click", "#new-input", displayButtonInfo);
-displayButtonInfo();
+// $(document).on("click", ".items-btn", displayButtonInfo);
+$(document).on("click", ".items-btn", function() {
+    searchTerm = $(this).attr("data-name");
+    displayButtonInfo();
+});
+
+
 // Calling the renderButtons function to display the intial buttons
 renderButtons();
