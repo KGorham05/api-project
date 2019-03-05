@@ -19,10 +19,15 @@
 </head>
 
 <body>
-
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Gif Search</a>
+        </li>
+        <li class="nav-item">
+            <a id="favorites" class="nav-link" href="#">Favorites</a>
+        </li>
+    </ul>
     <div class="container">
-        <h1>Giphy Search</h1>
-
         <!-- Rendered Buttons will get Dumped Here  -->
         <div id="buttons-view"></div>
 
@@ -32,7 +37,7 @@
             <br>
 
             <!-- Button triggers new search item to be added -->
-            <input id="add-item-btn" type="submit" value="Click to create a new button!">
+            <input class="btn btn-outline-info" id="add-item-btn" type="submit" value="Click to create a new button!">
         </form>
 
         <!-- New search items will Get Dumped Here -->

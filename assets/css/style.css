@@ -4,3 +4,7 @@ form,
 input {
   margin: 10px;
 }
+
+body {
+  background-image: url("https://stripe.com/img/blog/posts/connect-frontend/header-background.png");
+}
